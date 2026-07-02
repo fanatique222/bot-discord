@@ -17,5 +17,5 @@ async def on_member_join(member):
         await channel.send(
             f"Salut {member.mention}, bienvenue sur **{member.guild.name}** !\n"
             f"Nous sommes désormais **{member.guild.member_count}** membres sur le serveur."
-        )        )
+        )        
 client.run(os.getenv("TOKEN"))
