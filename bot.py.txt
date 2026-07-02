@@ -1,0 +1,21 @@
+import discord
+import os
+
+intents = discord.Intents.default()
+intents.members = True
+
+client = discord.Client(intents=intents)
+
+@client.event
+async def on_ready():
+    print(f"{client.user} est en ligne !")
+
+@client.event
+async def on_member_join(member):
+    channel = member.guild.system_channel
+    if channel:
+        await channel.send(
+            f"🎉 Bienvenue {member.mention} sur **{member.guild.name}** !"
+        )
+
+client.run(os.getenv("TOKEN"))
