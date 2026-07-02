@@ -15,6 +15,7 @@ async def on_member_join(member):
     channel = discord.utils.get(member.guild.text_channels, name="joins")
     if channel:
         await channel.send(
-            f"🎉 Bienvenue {member.mention} sur **{member.guild.name}** !"
-        )
+            f"Salut {member.mention}, bienvenue sur **{member.guild.name}** !\n"
+            f"Nous sommes désormais **{member.guild.member_count}** membres sur le serveur."
+        )        )
 client.run(os.getenv("TOKEN"))
