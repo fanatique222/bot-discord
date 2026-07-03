@@ -12,7 +12,7 @@ async def on_ready():
 
 @bot.event
 async def on_member_join(member):
-    channel = bot.get_channel(1521769165055070270) 
+    channel = bot.get_channel(1521999167252074627) 
     if channel:
         embed = discord.Embed(
             title="🎉 Nouveau membre !",
