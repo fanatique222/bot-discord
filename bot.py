@@ -7,24 +7,29 @@ intents.members = True  # Obligatoire pour détecter les nouveaux membres
 bot = commands.Bot(command_prefix="!", intents=intents)
 
 @bot.event
-async def on_ready():
-    print(f"Connecté en tant que {bot.user}")
-
-@bot.event
 async def on_member_join(member):
+    # Donne un rôle automatiquement
+    role = discord.utils.get(member.guild.roles, name="Membre")
+    if role:
+        await member.add_roles(role)
+
+    # Salon de bienvenue
     channel = bot.get_channel(1521999167252074627) 
     if channel:
         embed = discord.Embed(
-            title="🎉 Nouveau membre !",
+            title="🎉 Bienvenue !",
             description=(
                 f"Bienvenue {member.mention} sur **{member.guild.name}** !\n\n"
-                f"👥 Tu es le **{member.guild.member_count}ᵉ membre** du serveur.\n"
+                f"👥 Nous sommes maintenant **{member.guild.member_count} membres**.\n"
+                f"🎭 Le rôle **{membre}** t'a été attribué !"
             ),
-            color=discord.Color.blue()
+            color=discord.Color.green()
         )
 
         if member.avatar:
             embed.set_thumbnail(url=member.avatar.url)
+
+        await channel.send(embed=embed)
 
         embed.set_footer(text=f"ID du membre : {member.id}")
 
