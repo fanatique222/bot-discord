@@ -12,14 +12,13 @@ async def on_ready():
 
 @bot.event
 async def on_member_join(member):
-    channel = bot.get_channel(ID_DU_SALON)  # Mets l'ID du salon ici
+    channel = bot.get_channel(1521769165055070270) 
     if channel:
         embed = discord.Embed(
             title="🎉 Nouveau membre !",
             description=(
                 f"Bienvenue {member.mention} sur **{member.guild.name}** !\n\n"
-                f"👥 Tu es le **{member.guild.member_count}ᵉ membre** du serveur.\n"
-                f"Amuse-toi bien et n'oublie pas de lire le règlement !"
+                f"👥 Tu es le **{member.guild.member_count}ᵉ membre** du serveur.\n
             ),
             color=discord.Color.blue()
         )
