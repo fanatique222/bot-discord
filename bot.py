@@ -18,7 +18,7 @@ async def on_member_join(member):
             title="🎉 Nouveau membre !",
             description=(
                 f"Bienvenue {member.mention} sur **{member.guild.name}** !\n\n"
-                f"👥 Tu es le **{member.guild.member_count}ᵉ membre** du serveur.\n
+                f"👥 Tu es le **{member.guild.member_count}ᵉ membre** du serveur.\n"
             ),
             color=discord.Color.blue()
         )
