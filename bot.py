@@ -34,5 +34,6 @@ async def on_member_join(member):
         embed.set_footer(text=f"ID du membre : {member.id}")
 
         await channel.send(embed=embed)
+import os
 
-bot.run("TON_TOKEN")
+bot.run(os.getenv("TOKEN"))
