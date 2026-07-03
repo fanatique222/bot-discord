@@ -1,21 +1,34 @@
 import discord
-import os
+from discord.ext import commands
 
 intents = discord.Intents.default()
-intents.members = True
+intents.members = True  # Obligatoire pour détecter les nouveaux membres
 
-client = discord.Client(intents=intents)
+bot = commands.Bot(command_prefix="!", intents=intents)
 
-@client.event
+@bot.event
 async def on_ready():
-    print(f"{client.user} est en ligne !")
+    print(f"Connecté en tant que {bot.user}")
 
-@client.event
+@bot.event
 async def on_member_join(member):
-    channel = discord.utils.get(member.guild.text_channels, name="joins")
+    channel = bot.get_channel(ID_DU_SALON)  # Mets l'ID du salon ici
     if channel:
-        await channel.send(
-            f"Salut {member.mention}, bienvenue sur **{member.guild.name}** !\n"
-            f"Nous sommes désormais **{member.guild.member_count}** membres sur le serveur."
-        )        
-client.run(os.getenv("TOKEN"))
+        embed = discord.Embed(
+            title="🎉 Nouveau membre !",
+            description=(
+                f"Bienvenue {member.mention} sur **{member.guild.name}** !\n\n"
+                f"👥 Tu es le **{member.guild.member_count}ᵉ membre** du serveur.\n"
+                f"Amuse-toi bien et n'oublie pas de lire le règlement !"
+            ),
+            color=discord.Color.blue()
+        )
+
+        if member.avatar:
+            embed.set_thumbnail(url=member.avatar.url)
+
+        embed.set_footer(text=f"ID du membre : {member.id}")
+
+        await channel.send(embed=embed)
+
+bot.run("TON_TOKEN")
