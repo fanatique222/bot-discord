@@ -12,13 +12,12 @@ async def on_ready():
 
 @bot.event
 async def on_member_join(member):
-    # Donner le rôle automatiquement
     role = discord.utils.get(member.guild.roles, name="Membre")
     if role:
         await member.add_roles(role)
 
-    # Salon de bienvenue
     channel = bot.get_channel(1521999167252074627)
+
     if channel:
         embed = discord.Embed(
             title="🎉 Bienvenue !",
@@ -37,4 +36,4 @@ async def on_member_join(member):
 
         await channel.send(embed=embed)
 
-bot.run(os.getenv("TOKEN"))
+bot.run("TON_TOKEN_ICI")
