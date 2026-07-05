@@ -1,6 +1,5 @@
 import discord
 from discord.ext import commands
-import os
 
 intents = discord.Intents.default()
 intents.members = True
@@ -13,12 +12,29 @@ async def on_ready():
 
 @bot.event
 async def on_member_join(member):
-    channel = discord.utils.get(member.guild.text_channels, name="selem")
+    # Donner le rôle automatiquement
+    role = discord.utils.get(member.guild.roles, name="Membre")
+    if role:
+        await member.add_roles(role)
 
+    # Salon de bienvenue
+    channel = bot.get_channel(1521999167252074627)
     if channel:
-        await channel.send(
-            f"👋 Selem {member.mention} sur **{member.guild.name}** !\n"
-            f"👥 Nous sommes maintenant **{member.guild.member_count}** membres."
+        embed = discord.Embed(
+            title="🎉 Bienvenue !",
+            description=(
+                f"Bienvenue {member.mention} sur **{member.guild.name}** !\n\n"
+                f"👥 Nous sommes maintenant **{member.guild.member_count} membres**.\n"
+                f"🎭 Le rôle **{role.name if role else 'Membre'}** t'a été attribué !"
+            ),
+            color=discord.Color.green()
         )
+
+        if member.avatar:
+            embed.set_thumbnail(url=member.avatar.url)
+
+        embed.set_footer(text=f"ID du membre : {member.id}")
+
+        await channel.send(embed=embed)
 
 bot.run(os.getenv("TOKEN"))
