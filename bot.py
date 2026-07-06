@@ -15,32 +15,16 @@ async def on_ready():
 
 @bot.event
 async def on_member_join(member):
-    # Donner le rôle automatiquement
     role = discord.utils.get(member.guild.roles, name="Membre")
     if role:
         await member.add_roles(role)
 
-    # ID du salon de bienvenue
     channel = bot.get_channel(1521999167252074627)
-
     if channel:
-        embed = discord.Embed(
-            title="🎉 Bienvenue !",
-            description=(
-                f"Bienvenue {member.mention} sur **{member.guild.name}** !\n\n"
-                f"👥 Nous sommes maintenant **{member.guild.member_count} membres**.\n"
-                f"🎭 Le rôle **{role.name if role else 'Membre'}** t'a été attribué !"
-            ),
-            color=discord.Color.green()
+        await channel.send(
+            f"{member.mention} nous a rejoint, nous sommes maintenant "
+            f"**{member.guild.member_count}** sur le serveur !"
         )
-
-        if member.avatar:
-            embed.set_thumbnail(url=member.avatar.url)
-
-        embed.set_footer(text=f"ID du membre : {member.id}")
-
-        await channel.send(embed=embed)
-
 
 TOKEN = os.getenv("TOKEN")
 
