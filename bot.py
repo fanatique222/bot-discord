@@ -30,4 +30,6 @@ TOKEN = os.getenv("TOKEN")
 
 if not TOKEN:
     print("Erreur : la variable d'environnement TOKEN n'est pas définie.")
+else:
+    bot.run("TOKEN")
 
