@@ -26,9 +26,8 @@ async def on_member_join(member):
             f"**{member.guild.member_count}** sur le serveur !"
         )
 
-TOKEN = os.getenv("TOKEN")
+TOKEN = os.getenv("TOKEN"))
 
 if not TOKEN:
     print("Erreur : la variable d'environnement TOKEN n'est pas définie.")
-else:
-    bot.run(TOKEN)
+
