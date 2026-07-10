@@ -19,7 +19,7 @@ async def on_member_join(member):
     if role:
         await member.add_roles(role)
 
-    channel = bot.get_channel(1521999167252074627)
+    channel = bot.get_channel(1525123781562204322)
     if channel:
         await channel.send(
             f"{member.mention} nous a rejoint, nous sommes maintenant "
